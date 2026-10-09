@@ -1,0 +1,59 @@
+# Vertex NextJS Starter
+
+Use our starter application template using the NextJS framework.
+
+View a scene, apply camera states, and see a scene item's metadata. We built this application following best practices for integrating the Vertex platform. [Follow our guide](http://developer.vertex3d.com/docs/guides/build-your-first-app) to build a foundation, then add functionality to create your own prototype application using Vertex.
+
+## Run locally in Docker
+
+1. Copy `.env.local.template` to `.env.local` and optionally edit values
+1. Run `docker-compose --file ./docker-compose.yml up` to start the app locally
+1. Browse to http://localhost:3000
+
+If you pull down changes, you'll need to run `docker-compose --file ./docker-compose.yml build` to build them and then `docker-compose --file ./docker-compose.yml up` again.
+
+## Local development
+
+1. Copy `.env.local.template` to `.env.local` and optionally edit values
+1. Install dependencies, `yarn install`
+1. Run `yarn dev` to start the local development server
+1. Browse to http://localhost:3000
+
+### With Vertex-web-sdk
+
+1. `yarn build` in `vertex-web-sdk`
+1. `yarn link` from local `vertex-web-sdk`
+1. make these changes in package.json
+
+```json
+  "scripts": {
+    "dev": "NODE_OPTIONS=--preserve-symlinks next dev --webpack",
+    ...
+  },
+  "resolutions": {
+    "@vertexvis/viewer": "portal:../vertex-web-sdk/packages/viewer",
+    "@vertexvis/viewer-react": "portal:../vertex-web-sdk/packages/viewer-react",
+    ...
+  }
+```
+
+1. `yarn install` to pull local packages
+
+### Project organization
+
+```text
+public/       // Static assets
+src/
+components/ // Components used in pages
+lib/        // Shared libraries and utilities
+pages/      // Pages served by NextJS
+  api/      // API endpoints served by NextJS
+```
+
+### Deployment
+
+A few options for deployment,
+
+- [Vercel](https://nextjs.org/docs/deployment)
+- [Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
+- [AWS via OpenNext](https://opennext.js.org)
